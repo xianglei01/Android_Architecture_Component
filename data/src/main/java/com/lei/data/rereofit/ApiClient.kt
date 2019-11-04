@@ -55,11 +55,11 @@ class ApiClient internal constructor(context: Context) {
         private const val DEFAULT_READ_TIME_OUT = 30
         private var apiClient: ApiClient? = null
 
-        fun getApiClient(context: Context): ApiClient {
+        fun getApiService(context: Context): ApiService {
             if (apiClient == null) {
                 apiClient = ApiClient(context)
             }
-            return apiClient!!
+            return apiClient!!.getApiService()
         }
     }
 }

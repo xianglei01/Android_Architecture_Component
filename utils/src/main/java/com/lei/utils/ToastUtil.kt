@@ -3,7 +3,6 @@ package com.lei.utils
 import android.content.Context
 import android.widget.Toast
 
-
 /**
  * @author xianglei
  * @created 2018/7/10 18:46

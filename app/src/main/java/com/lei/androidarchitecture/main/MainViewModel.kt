@@ -6,6 +6,8 @@ import com.lei.androidarchitecture.BaseViewModel
 import com.lei.data.BaseObserver
 import com.lei.data.exception.ResultException
 import com.lei.data.model.Demo
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * created by xianglei
@@ -15,9 +17,17 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
 
     fun request() {
         getProgressState().value = true
+//        GlobalScope.launch {
+//            val demo = mainRepository.cDemo()
+//            //弱提示title
+//            getToastContent().value = demo?.data?.title
+//            getProgressState().value = false
+//        }
         mainRepository.demo(object : BaseObserver<Demo?>() {
             override fun onSuccess(data: Demo?) {
                 getProgressState().value = false
+                //弱提示title
+                getToastContent().value = data?.title
             }
 
             override fun onFailed(e: ResultException, data: Demo?) {
