@@ -1,0 +1,28 @@
+package com.lei.data.repository
+
+import android.content.Context
+import com.lei.data.BaseObserver
+import com.lei.data.JobExecutor
+import com.lei.data.model.Demo
+import com.lei.data.rereofit.ApiClient
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+
+/**
+ * created by xianglei
+ * 2019/11/4 14:00
+ */
+@Deprecated("暂时未用")
+class RemoteImplRepository(val context: Context) : RemoteRepository {
+
+    private var compositeDisposable = CompositeDisposable()
+
+    override fun demo(observer: BaseObserver<Demo?>) {
+        compositeDisposable.add(ApiClient.getApiClient(context).getApiService()
+                .demo()
+                .subscribeOn(Schedulers.from(JobExecutor.getJobExecutor()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(observer))
+    }
+}
