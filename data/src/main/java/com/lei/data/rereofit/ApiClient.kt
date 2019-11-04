@@ -5,7 +5,6 @@ import com.lei.data.BuildConfig
 import com.lei.data.CoroutineCallAdapterFactory
 import com.lei.data.interceptor.CommonInterceptor
 import com.lei.data.interceptor.HttpLoggingInterceptor
-import com.lei.data.interceptor.MoreBaseUrlInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -32,9 +31,6 @@ class ApiClient internal constructor(context: Context) {
                 .sslSocketFactory(SSLSocketFactoryUtil.createSSLSocketFactory()!!, SSLSocketFactoryUtil.createTrustAllManager()!!)
                 .hostnameVerifier(SSLSocketFactoryUtil.TrustAllHostnameVerifier())
                 .retryOnConnectionFailure(true)
-        if (BuildConfig.DEBUG) {
-            builder.addInterceptor(MoreBaseUrlInterceptor())
-        }
         okHttpClient = builder.build()
 
         this.retrofit = Retrofit.Builder()
