@@ -1,6 +1,6 @@
 package com.lei.data.repository
 
-import com.lei.data.BaseObserver
+import com.lei.data.net.BaseObserver
 import com.lei.data.model.Demo
 
 /**

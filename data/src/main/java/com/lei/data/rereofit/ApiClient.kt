@@ -2,7 +2,6 @@ package com.lei.data.rereofit
 
 import android.content.Context
 import com.lei.data.BuildConfig
-import com.lei.data.CoroutineCallAdapterFactory
 import com.lei.data.interceptor.CommonInterceptor
 import com.lei.data.interceptor.HttpLoggingInterceptor
 import okhttp3.OkHttpClient

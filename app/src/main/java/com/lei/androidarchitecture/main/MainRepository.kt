@@ -1,8 +1,8 @@
 package com.lei.androidarchitecture.main
 
 import android.content.Context
-import com.lei.data.BaseObserver
-import com.lei.data.BaseRepository
+import com.lei.data.net.BaseObserver
+import com.lei.data.repository.BaseRepository
 import com.lei.data.JobExecutor
 import com.lei.data.model.BaseModel
 import com.lei.data.model.Demo

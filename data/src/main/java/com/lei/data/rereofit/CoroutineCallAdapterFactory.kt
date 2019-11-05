@@ -1,4 +1,4 @@
-package com.lei.data
+package com.lei.data.rereofit
 
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred

@@ -3,11 +3,9 @@ package com.lei.androidarchitecture.main
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.lei.androidarchitecture.BaseViewModel
-import com.lei.data.BaseObserver
+import com.lei.data.net.BaseObserver
 import com.lei.data.exception.ResultException
 import com.lei.data.model.Demo
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 /**
  * created by xianglei

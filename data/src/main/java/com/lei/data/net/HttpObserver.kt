@@ -1,4 +1,4 @@
-package com.lei.data
+package com.lei.data.net
 
 import android.net.ParseException
 import com.google.gson.JsonParseException

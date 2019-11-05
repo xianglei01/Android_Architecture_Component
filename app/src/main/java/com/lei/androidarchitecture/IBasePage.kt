@@ -22,6 +22,4 @@ interface IBasePage {
 
     fun hideBaseLoading()
 
-    fun destroy()
-
 }

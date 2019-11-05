@@ -1,7 +1,7 @@
 package com.lei.data.repository
 
 import android.content.Context
-import com.lei.data.BaseObserver
+import com.lei.data.net.BaseObserver
 import com.lei.data.JobExecutor
 import com.lei.data.model.Demo
 import com.lei.data.rereofit.ApiClient
@@ -19,7 +19,7 @@ class RemoteImplRepository(val context: Context) : RemoteRepository {
     private var compositeDisposable = CompositeDisposable()
 
     override fun demo(observer: BaseObserver<Demo?>) {
-        compositeDisposable.add(ApiClient.getApiClient(context).getApiService()
+        compositeDisposable.add(ApiClient.getApiService(context)
                 .demo()
                 .subscribeOn(Schedulers.from(JobExecutor.getJobExecutor()))
                 .observeOn(AndroidSchedulers.mainThread())

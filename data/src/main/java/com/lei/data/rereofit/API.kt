@@ -8,8 +8,8 @@ import com.lei.data.BuildConfig
  */
 object API {
 
-    private const val DEBUG_URL = ""
-    private const val RELEASE_URL = ""
+    private const val DEBUG_URL = "http://www.baidu.com"
+    private const val RELEASE_URL = "http://www.baidu.com"
 
     var BASE_URL = if (BuildConfig.DEBUG) DEBUG_URL else RELEASE_URL
 

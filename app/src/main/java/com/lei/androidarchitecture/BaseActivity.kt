@@ -1,7 +1,7 @@
 package com.lei.androidarchitecture
 
-import android.support.v4.app.FragmentActivity
 import android.os.Bundle
+import android.support.v4.app.FragmentActivity
 
 /**
  * created by xianglei
@@ -23,8 +23,4 @@ abstract class BaseActivity : FragmentActivity(), IBasePage {
     override fun hideBaseLoading() {
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        destroy()
-    }
 }

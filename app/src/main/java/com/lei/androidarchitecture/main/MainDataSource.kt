@@ -1,6 +1,6 @@
 package com.lei.androidarchitecture.main
 
-import com.lei.data.BaseObserver
+import com.lei.data.net.BaseObserver
 import com.lei.data.model.BaseModel
 import com.lei.data.model.Demo
 import io.reactivex.disposables.Disposable

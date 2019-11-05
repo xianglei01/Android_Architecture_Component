@@ -39,6 +39,4 @@ class MainActivity : BaseActivity() {
     override fun initData() {
     }
 
-    override fun destroy() {
-    }
 }

@@ -1,4 +1,4 @@
-package com.lei.data
+package com.lei.data.repository
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
