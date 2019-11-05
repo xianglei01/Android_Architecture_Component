@@ -22,9 +22,9 @@ class ApiClient internal constructor(context: Context) {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         }
         val builder = OkHttpClient.Builder()
-        builder.connectTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-                .writeTimeout(DEFAULT_READ_TIME_OUT.toLong(), TimeUnit.SECONDS)
-                .readTimeout(DEFAULT_READ_TIME_OUT.toLong(), TimeUnit.SECONDS)
+        builder.connectTimeout(DEFAULT_TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(DEFAULT_READ_TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(DEFAULT_READ_TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(CommonInterceptor(context))
                 .addInterceptor(httpLoggingInterceptor)
                 .sslSocketFactory(SSLSocketFactoryUtil.createSSLSocketFactory()!!, SSLSocketFactoryUtil.createTrustAllManager()!!)
@@ -36,7 +36,7 @@ class ApiClient internal constructor(context: Context) {
                 .baseUrl(API.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                .addCallAdapterFactory(CoroutinesCallAdapterFactory())
                 .client(okHttpClient!!)
                 .build()
     }
@@ -50,8 +50,8 @@ class ApiClient internal constructor(context: Context) {
 
     companion object {
         //超时时间 5s
-        private const val DEFAULT_TIME_OUT = 30
-        private const val DEFAULT_READ_TIME_OUT = 30
+        private const val DEFAULT_TIME_OUT = 30L
+        private const val DEFAULT_READ_TIME_OUT = 30L
         private var apiClient: ApiClient? = null
 
         fun getApiService(context: Context): ApiService {

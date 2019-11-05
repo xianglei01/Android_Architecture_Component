@@ -8,7 +8,7 @@ import android.net.ConnectivityManager
  */
 object NetworkUtils {
 
-    fun isNetworkConncetion(context: Context?): Boolean {
+    fun isNetworkConnection(context: Context?): Boolean {
         if (context == null) {
             return false
         }

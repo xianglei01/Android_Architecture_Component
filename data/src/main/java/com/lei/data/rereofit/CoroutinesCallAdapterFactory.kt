@@ -10,11 +10,11 @@ import java.lang.reflect.Type
  * created by xianglei
  * 2019/10/28 17:14
  */
-class CoroutineCallAdapterFactory private constructor() : CallAdapter.Factory() {
+class CoroutinesCallAdapterFactory private constructor() : CallAdapter.Factory() {
     companion object {
         @JvmStatic
         @JvmName("create")
-        operator fun invoke() = CoroutineCallAdapterFactory()
+        operator fun invoke() = CoroutinesCallAdapterFactory()
     }
 
     override fun get(

@@ -2,6 +2,7 @@ package com.lei.data.net
 
 import android.net.ParseException
 import com.google.gson.JsonParseException
+import com.google.gson.stream.MalformedJsonException
 import com.lei.data.exception.ApiResultCode
 import com.lei.data.exception.ResultException
 import io.reactivex.observers.DisposableObserver
@@ -53,7 +54,8 @@ abstract class HttpObserver<T, E> : DisposableObserver<T>() {
             }
         } else if (t is JsonParseException
                 || t is JSONException
-                || t is ParseException) {
+                || t is ParseException
+                || t is MalformedJsonException) {
             ex = ResultException(ApiResultCode.PARSE_ERROR, "解析错误")
         } else if (t is SocketException) {
             ex = ResultException(ApiResultCode.REQUEST_TIMEOUT.toString(), "网络连接错误，请重试")
