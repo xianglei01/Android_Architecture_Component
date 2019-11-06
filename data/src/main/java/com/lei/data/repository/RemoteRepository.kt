@@ -1,7 +1,7 @@
 package com.lei.data.repository
 
-import com.lei.data.net.BaseObserver
 import com.lei.data.model.Demo
+import io.reactivex.observers.DisposableObserver
 
 /**
  * created by xianglei
@@ -10,5 +10,5 @@ import com.lei.data.model.Demo
 @Deprecated("暂时未用")
 interface RemoteRepository {
 
-    fun demo(observer: BaseObserver<Demo?>)
+    fun demo(observer: DisposableObserver<List<Demo>?>)
 }

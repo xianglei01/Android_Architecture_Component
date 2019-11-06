@@ -18,7 +18,7 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
                 },
                 onSuccess = {
                     //弱提示title
-                    toastContent().value = it.data?.title
+                    toastContent().value = it?.get(0)?.full_name
                     progressState().value = false
                 },
                 onFail = {

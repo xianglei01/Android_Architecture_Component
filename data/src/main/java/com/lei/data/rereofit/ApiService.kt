@@ -1,6 +1,5 @@
 package com.lei.data.rereofit
 
-import com.lei.data.model.BaseModel
 import com.lei.data.model.Demo
 import io.reactivex.Observable
 import kotlinx.coroutines.Deferred
@@ -15,9 +14,9 @@ import retrofit2.http.Url
 interface ApiService {
 
     @GET
-    fun commonGet(@Url url: String, @QueryMap maps: Map<String, String?> = HashMap()): Observable<BaseModel<Demo?>>
+    fun commonGet(@Url url: String, @QueryMap maps: Map<String, String?> = HashMap()): Observable<List<Demo>?>
 
     @GET(API.DEMO)
-    fun cDemo(): Deferred<BaseModel<Demo?>>
+    fun cDemo(): Deferred<List<Demo>?>
 
 }

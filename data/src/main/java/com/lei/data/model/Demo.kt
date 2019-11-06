@@ -6,9 +6,9 @@ import java.io.Serializable
  * created by xianglei
  * 2019/11/1 10:47
  */
-data class Demo(val date: Date?,
-                val author: String,
-                val title: String,
-                val digest: String,
-                val content: String,
-                val wc: String) : Serializable
+data class Demo(val id: Long,
+                val node_id: String,
+                val name: String,
+                val full_name: String,
+                val private: Boolean,
+                val owner: Any) : Serializable

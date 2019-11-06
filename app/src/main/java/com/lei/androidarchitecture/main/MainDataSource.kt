@@ -1,9 +1,8 @@
 package com.lei.androidarchitecture.main
 
-import com.lei.data.net.BaseObserver
-import com.lei.data.model.BaseModel
 import com.lei.data.model.Demo
 import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableObserver
 
 /**
  * created by xianglei
@@ -11,7 +10,7 @@ import io.reactivex.disposables.Disposable
  */
 interface MainDataSource {
 
-    fun demo(observer: BaseObserver<Demo?>): Disposable
+    fun demo(observer: DisposableObserver<List<Demo>?>): Disposable
 
-    suspend fun cDemo(): BaseModel<Demo?>
+    suspend fun cDemo(): List<Demo>?
 }

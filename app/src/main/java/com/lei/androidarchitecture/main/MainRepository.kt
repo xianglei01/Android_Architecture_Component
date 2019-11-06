@@ -2,14 +2,13 @@ package com.lei.androidarchitecture.main
 
 import android.content.Context
 import com.lei.data.JobExecutor
-import com.lei.data.model.BaseModel
 import com.lei.data.model.Demo
-import com.lei.data.net.BaseObserver
 import com.lei.data.repository.BaseRepository
 import com.lei.data.rereofit.API
 import com.lei.data.rereofit.ApiClient.apiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 
 /**
@@ -18,7 +17,7 @@ import io.reactivex.schedulers.Schedulers
  */
 class MainRepository(val context: Context) : MainDataSource, BaseRepository() {
 
-    override fun demo(observer: BaseObserver<Demo?>): Disposable {
+    override fun demo(observer: DisposableObserver<List<Demo>?>): Disposable {
         val disposable = apiService
                 .commonGet(API.DEMO)
                 .subscribeOn(Schedulers.from(JobExecutor.getJobExecutor()))
@@ -28,7 +27,7 @@ class MainRepository(val context: Context) : MainDataSource, BaseRepository() {
         return disposable
     }
 
-    override suspend fun cDemo(): BaseModel<Demo?> {
+    override suspend fun cDemo(): List<Demo>? {
         return apiService.cDemo().await()
     }
 }

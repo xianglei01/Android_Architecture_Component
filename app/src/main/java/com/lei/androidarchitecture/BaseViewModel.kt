@@ -38,14 +38,11 @@ open class BaseViewModel : ViewModel() {
 
     fun toastContent(): MutableLiveData<String> = toastMutableLiveData
 
-    fun <T> execute(request: suspend () -> T?, onSuccess: (T) -> Unit = {}, onFail: (ResultException) -> Unit = {}) =
+    fun <T> execute(request: suspend () -> T?, onSuccess: (T?) -> Unit = {}, onFail: (ResultException) -> Unit = {}) =
             viewModelScope.launch {
                 try {
-                    val data: T? = withContext(Dispatchers.IO) { request() }
-                    data?.let {
-                        //请求成功
-                        onSuccess(it)
-                    }
+                    //请求成功
+                    onSuccess(withContext(Dispatchers.IO) { request() })
                 } catch (e: Exception) {
                     //请求异常捕获
                     onFail(getResultException(e))
