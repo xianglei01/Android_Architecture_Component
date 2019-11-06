@@ -33,8 +33,15 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api 'io.reactivex.rxjava2:rxjava:2.1.13'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //协程
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01'
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01'
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
 }
 repositories {
     mavenCentral()

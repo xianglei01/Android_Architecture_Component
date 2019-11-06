@@ -1,6 +1,5 @@
 package com.lei.data.rereofit
 
-import android.content.Context
 import com.lei.data.BuildConfig
 import com.lei.data.interceptor.CommonInterceptor
 import com.lei.data.interceptor.HttpLoggingInterceptor
@@ -10,13 +9,13 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class ApiClient internal constructor(context: Context) {
+object ApiClient {
 
-    private val retrofit: Retrofit
-    private var apiService: ApiService? = null
-    private var okHttpClient: OkHttpClient? = null
+    //超时时间 5s
+    private const val DEFAULT_TIME_OUT = 30L
+    private const val DEFAULT_READ_TIME_OUT = 30L
 
-    init {
+    val apiService by lazy {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         if (BuildConfig.DEBUG) {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -25,40 +24,21 @@ class ApiClient internal constructor(context: Context) {
         builder.connectTimeout(DEFAULT_TIME_OUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_READ_TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(DEFAULT_READ_TIME_OUT, TimeUnit.SECONDS)
-                .addInterceptor(CommonInterceptor(context))
+//                .addInterceptor(CommonInterceptor(context))
                 .addInterceptor(httpLoggingInterceptor)
                 .sslSocketFactory(SSLSocketFactoryUtil.createSSLSocketFactory()!!, SSLSocketFactoryUtil.createTrustAllManager()!!)
                 .hostnameVerifier(SSLSocketFactoryUtil.TrustAllHostnameVerifier())
                 .retryOnConnectionFailure(true)
-        okHttpClient = builder.build()
+        val okHttpClient = builder.build()
 
-        this.retrofit = Retrofit.Builder()
+        val retrofit = Retrofit.Builder()
                 .baseUrl(API.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addCallAdapterFactory(CoroutinesCallAdapterFactory())
                 .client(okHttpClient!!)
                 .build()
+        return@lazy retrofit.create(ApiService::class.java)
     }
 
-    fun getApiService(): ApiService {
-        if (apiService == null) {
-            apiService = retrofit.create(ApiService::class.java)
-        }
-        return apiService!!
-    }
-
-    companion object {
-        //超时时间 5s
-        private const val DEFAULT_TIME_OUT = 30L
-        private const val DEFAULT_READ_TIME_OUT = 30L
-        private var apiClient: ApiClient? = null
-
-        fun getApiService(context: Context): ApiService {
-            if (apiClient == null) {
-                apiClient = ApiClient(context)
-            }
-            return apiClient!!.getApiService()
-        }
-    }
 }

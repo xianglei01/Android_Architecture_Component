@@ -1,6 +1,6 @@
 package com.lei.androidarchitecture
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 
 /**
  * created by xianglei

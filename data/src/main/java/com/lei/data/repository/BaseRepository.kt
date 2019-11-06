@@ -1,7 +1,10 @@
 package com.lei.data.repository
 
+import com.lei.data.model.BaseModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * created by xianglei
@@ -23,6 +26,10 @@ open class BaseRepository {
 
     protected fun add(disposable: Disposable) {
         compositeDisposable.add(disposable)
+    }
+
+    suspend fun <T : Any?> request(call: suspend () -> BaseModel<T>): BaseModel<T> {
+        return withContext(Dispatchers.IO) { call.invoke() }
     }
 
 }

@@ -3,8 +3,8 @@ package com.lei.androidarchitecture.main
 import android.Manifest.permission
 import android.Manifest.permission.READ_PHONE_STATE
 import android.annotation.SuppressLint
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.lei.androidarchitecture.BaseActivity
 import com.lei.androidarchitecture.R
 import com.lei.utils.ToastUtil
@@ -24,10 +24,10 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         mViewModel = ViewModelProviders.of(this,
                 MainViewModel.MainViewModelFactory(MainRepository(this))).get(MainViewModel::class.java)
-        mViewModel.getToastContent().observe(this, Observer {
+        mViewModel.toastContent().observe(this, Observer {
             ToastUtil.toast(this, it)
         })
-        mViewModel.getProgressState().observe(this, Observer {
+        mViewModel.progressState().observe(this, Observer {
             if (it == true) {
                 showBaseLoading(true)
             } else {
