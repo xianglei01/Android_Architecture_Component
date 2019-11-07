@@ -8,9 +8,7 @@ import com.google.gson.JsonParseException
 import com.google.gson.stream.MalformedJsonException
 import com.lei.data.exception.ApiResultCode
 import com.lei.data.exception.ResultException
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.json.JSONException
 import retrofit2.HttpException
 import java.net.SocketException
@@ -25,6 +23,7 @@ import javax.net.ssl.SSLHandshakeException
  */
 open class BaseViewModel : ViewModel() {
 
+    private val jobList = MutableList<Job>()
     /**
      * loading框状态监听
      */
@@ -37,6 +36,11 @@ open class BaseViewModel : ViewModel() {
     fun progressState(): MutableLiveData<Boolean> = progressMutableLiveData
 
     fun toastContent(): MutableLiveData<String> = toastMutableLiveData
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+    }
 
     fun <T> execute(request: suspend () -> T?, onSuccess: (T?) -> Unit = {}, onFail: (ResultException) -> Unit = {}) =
             viewModelScope.launch {

@@ -26,18 +26,6 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
                     progressState().value = false
                 }
         )
-//        mainRepository.demo(object : BaseObserver<Demo?>() {
-//            override fun onSuccess(data: Demo?) {
-//                progressState().value = false
-//                //弱提示title
-//                toastContent().value = data?.title
-//            }
-//
-//            override fun onFailed(e: ResultException, data: Demo?) {
-//                progressState().value = false
-//                toastContent().value = e.message
-//            }
-//        })
     }
 
     override fun onCleared() {
@@ -45,10 +33,10 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
         mainRepository.dispose()
     }
 
-    class MainViewModelFactory(private val mainRepository: MainRepository) :
+    class MainViewModelFactory(private val repository: MainRepository) :
             ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return MainViewModel(mainRepository) as T
+            return MainViewModel(repository) as T
         }
     }
 
