@@ -11,32 +11,32 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
 
-    //超时时间 5s
+    //超时时间 30s
     private const val DEFAULT_TIME_OUT = 30L
     private const val DEFAULT_READ_TIME_OUT = 30L
 
-    val apiService by lazy {
+    val apiService: ApiService by lazy {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         if (BuildConfig.DEBUG) {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         }
-        val builder = OkHttpClient.Builder()
-        builder.connectTimeout(DEFAULT_TIME_OUT, TimeUnit.SECONDS)
+        val okHttpClient = OkHttpClient.Builder()
+                .connectTimeout(DEFAULT_TIME_OUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_READ_TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(DEFAULT_READ_TIME_OUT, TimeUnit.SECONDS)
-//                .addInterceptor(CommonInterceptor(context))
+                .addInterceptor(CommonInterceptor())
                 .addInterceptor(httpLoggingInterceptor)
-                .sslSocketFactory(SSLSocketFactoryUtil.createSSLSocketFactory()!!, SSLSocketFactoryUtil.createTrustAllManager()!!)
+                .sslSocketFactory(SSLSocketFactoryUtil.createSSLSocketFactory(), SSLSocketFactoryUtil.createTrustAllManager())
                 .hostnameVerifier(SSLSocketFactoryUtil.TrustAllHostnameVerifier())
                 .retryOnConnectionFailure(true)
-        val okHttpClient = builder.build()
+                .build()
 
         val retrofit = Retrofit.Builder()
                 .baseUrl(API.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addCallAdapterFactory(CoroutinesCallAdapterFactory())
-                .client(okHttpClient!!)
+                .client(okHttpClient)
                 .build()
         return@lazy retrofit.create(ApiService::class.java)
     }

@@ -28,11 +28,6 @@ class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel(
         )
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        mainRepository.dispose()
-    }
-
     class MainViewModelFactory(private val repository: MainRepository) :
             ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

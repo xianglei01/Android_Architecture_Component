@@ -8,7 +8,10 @@ import com.google.gson.JsonParseException
 import com.google.gson.stream.MalformedJsonException
 import com.lei.data.exception.ApiResultCode
 import com.lei.data.exception.ResultException
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONException
 import retrofit2.HttpException
 import java.net.SocketException
@@ -23,7 +26,6 @@ import javax.net.ssl.SSLHandshakeException
  */
 open class BaseViewModel : ViewModel() {
 
-    private val jobList = MutableList<Job>()
     /**
      * loading框状态监听
      */
@@ -72,7 +74,7 @@ open class BaseViewModel : ViewModel() {
                 || e is MalformedJsonException) {
             ex = ResultException(ApiResultCode.PARSE_ERROR, "解析错误")
         } else if (e is SocketException) {
-            ex = ResultException(ApiResultCode.REQUEST_TIMEOUT.toString(), "网络连接错误，请重试")
+            ex = ResultException(ApiResultCode.REQUEST_TIMEOUT.toString(), "请检查网络连接")
         } else if (e is SocketTimeoutException) {
             ex = ResultException(ApiResultCode.REQUEST_TIMEOUT.toString(), "网络连接超时")
         } else if (e is SSLHandshakeException) {

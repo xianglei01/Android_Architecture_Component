@@ -12,6 +12,7 @@ import kotlinx.coroutines.withContext
  * 网络请求基础管理类
  * 包含添加请求，取消请求
  */
+@Deprecated("暂时不用")
 open class BaseRepository {
 
     private var compositeDisposable = CompositeDisposable()
