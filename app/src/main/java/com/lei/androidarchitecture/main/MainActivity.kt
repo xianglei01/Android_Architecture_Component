@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
     @SuppressLint("CheckResult")
     override fun initView() {
         mViewModel = ViewModelProviders.of(this,
-                MainViewModel.MainViewModelFactory(MainRepository(this))).get(MainViewModel::class.java)
+                MainViewModel.MainViewModelFactory(MainRepository())).get(MainViewModel::class.java)
         mViewModel.toastContent().observe(this, Observer {
             ToastUtil.toast(this, it)
         })

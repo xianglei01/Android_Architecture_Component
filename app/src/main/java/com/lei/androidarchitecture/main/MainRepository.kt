@@ -1,6 +1,5 @@
 package com.lei.androidarchitecture.main
 
-import android.content.Context
 import com.lei.data.JobExecutor
 import com.lei.data.model.Demo
 import com.lei.data.repository.BaseRepository
@@ -15,7 +14,7 @@ import io.reactivex.schedulers.Schedulers
  * created by xianglei
  * 2019/10/28 16:13
  */
-class MainRepository(val context: Context) : MainDataSource, BaseRepository() {
+class MainRepository : MainDataSource, BaseRepository() {
 
     override fun demo(observer: DisposableObserver<List<Demo>?>): Disposable {
         val disposable = apiService
