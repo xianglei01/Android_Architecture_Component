@@ -8,8 +8,17 @@ import io.reactivex.Observable
  */
 class Permission {
 
+    /**
+     * 权限名称
+     */
     var name: String
+    /**
+     * 是否授权
+     */
     var granted: Boolean
+    /**
+     * 用户是否勾选禁止询问
+     */
     var shouldShowRequestPermissionRationale: Boolean
 
     constructor(name: String, granted: Boolean) : this(name, granted, false)

@@ -23,11 +23,11 @@ class MainActivity : BaseActivity() {
     @SuppressLint("CheckResult")
     override fun initView() {
         mViewModel = ViewModelProviders.of(this,
-                MainViewModel.MainViewModelFactory(MainRepository(this))).get(MainViewModel::class.java)
+                MainViewModel.MainViewModelFactory(MainRepository())).get(MainViewModel::class.java)
         mViewModel.toastContent().observe(this, Observer {
             ToastUtil.toast(this, it)
         })
-        mViewModel.progressState().observe(this, Observer {
+        mViewModel.loadingDataState().observe(this, Observer {
             if (it == true) {
                 showBaseLoading(true)
             } else {
@@ -41,6 +41,7 @@ class MainActivity : BaseActivity() {
             mViewModel.request()
         }
         btn_permission?.setOnClickListener {
+            //权限申请
             RxPermissions(this)
                     .request(permission.CAMERA,
                             READ_PHONE_STATE)

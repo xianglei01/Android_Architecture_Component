@@ -11,19 +11,19 @@ import com.lei.androidarchitecture.BaseViewModel
 class MainViewModel(private val mainRepository: MainRepository) : BaseViewModel() {
 
     fun request() {
-        progressState().value = true
+        loadingDataState().value = true
         execute(
                 request = {
-                    mainRepository.cDemo()
+                    mainRepository.demo()
                 },
                 onSuccess = {
                     //弱提示title
                     toastContent().value = it?.get(0)?.full_name
-                    progressState().value = false
+                    loadingDataState().value = false
                 },
                 onFail = {
                     toastContent().value = it.message
-                    progressState().value = false
+                    loadingDataState().value = false
                 }
         )
     }

@@ -147,6 +147,8 @@ class RxPermissions {
     /**
      * Request permissions immediately, **must be invoked during initialization phase
      * of your application**.
+     * 返回是否授权 grant
+     * 授权结果合并返回，全部都授权返回true，有一个未授权返回false
      */
     fun request(vararg permissions: String): Observable<Boolean> {
         return Observable.just(TRIGGER).compose(ensure<Any>(*permissions))
@@ -155,6 +157,8 @@ class RxPermissions {
     /**
      * Request permissions immediately, **must be invoked during initialization phase
      * of your application**.
+     * 返回permission对象
+     * 每个权限申请都单独返回授权结果
      */
     fun requestEach(vararg permissions: String): Observable<Permission> {
         return Observable.just(TRIGGER).compose(ensureEach<Any>(*permissions))
@@ -163,15 +167,15 @@ class RxPermissions {
     /**
      * Request permissions immediately, **must be invoked during initialization phase
      * of your application**.
+     * 返回permission对象
+     * 授权结果合并返回，全部授权返回成功，有一个拒绝则返回拒绝
      */
     fun requestEachCombined(vararg permissions: String): Observable<Permission> {
         return Observable.just(TRIGGER).compose(ensureEachCombined<Any>(*permissions))
     }
 
     private fun request(trigger: Observable<*>, vararg permissions: String): Observable<Permission> {
-        if (permissions == null || permissions.isEmpty()) {
-            throw IllegalArgumentException("RxPermissions.request/requestEach requires at least one input permission")
-        }
+        require(!(permissions == null || permissions.isEmpty())) { "RxPermissions.request/requestEach requires at least one input permission" }
         return oneOf(trigger, pending(*permissions))
                 .flatMap { requestImplementation(*permissions) }
     }

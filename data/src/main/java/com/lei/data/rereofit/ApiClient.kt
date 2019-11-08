@@ -5,7 +5,6 @@ import com.lei.data.interceptor.CommonInterceptor
 import com.lei.data.interceptor.HttpLoggingInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -34,7 +33,6 @@ object ApiClient {
         val retrofit = Retrofit.Builder()
                 .baseUrl(API.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addCallAdapterFactory(CoroutinesCallAdapterFactory())
                 .client(okHttpClient)
                 .build()

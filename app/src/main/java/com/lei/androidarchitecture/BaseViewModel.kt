@@ -29,13 +29,13 @@ open class BaseViewModel : ViewModel() {
     /**
      * loading框状态监听
      */
-    private val progressMutableLiveData = MutableLiveData<Boolean>()
+    private val loadingData = MutableLiveData<Boolean>()
     /**
      * 弱提示语
      */
     private val toastMutableLiveData = MutableLiveData<String>()
 
-    fun progressState(): MutableLiveData<Boolean> = progressMutableLiveData
+    fun loadingDataState(): MutableLiveData<Boolean> = loadingData
 
     fun toastContent(): MutableLiveData<String> = toastMutableLiveData
 
