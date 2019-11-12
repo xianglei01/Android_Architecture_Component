@@ -42,8 +42,7 @@ class MainActivity : BaseActivity() {
         btn_permission?.setOnClickListener {
             //权限申请
             RxPermissions(this)
-                    .request(permission.CAMERA,
-                            READ_PHONE_STATE)
+                    .request(permission.CAMERA, READ_PHONE_STATE)
                     .subscribe { granted ->
                         if (granted) {
                             // All requested permissions are granted

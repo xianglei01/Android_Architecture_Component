@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.app.Activity
 import android.os.Build
 import android.text.TextUtils
+import androidx.annotation.Size
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -120,7 +121,7 @@ class RxPermissions {
      * If one or several permissions have never been requested, invoke the related framework method
      * to ask the user if he allows the permissions.
      */
-    fun <T> ensureEach(vararg permissions: String): ObservableTransformer<T, Permission> {
+    private fun <T> ensureEach(vararg permissions: String): ObservableTransformer<T, Permission> {
         return ObservableTransformer { o -> request(o, *permissions) }
     }
 
@@ -132,7 +133,7 @@ class RxPermissions {
      * If one or several permissions have never been requested, invoke the related framework method
      * to ask the user if he allows the permissions.
      */
-    fun <T> ensureEachCombined(vararg permissions: String): ObservableTransformer<T, Permission> {
+    private fun <T> ensureEachCombined(vararg permissions: String): ObservableTransformer<T, Permission> {
         return ObservableTransformer { o ->
             request(o, *permissions)
                     .buffer(permissions.size)
@@ -298,6 +299,14 @@ class RxPermissions {
 
     fun onRequestPermissionsResult(permissions: Array<String>, grantResults: IntArray) {
         mRxPermissionsFragment.get().onRequestPermissionsResult(permissions, grantResults, BooleanArray(permissions.size))
+    }
+
+    fun hasPermissions(@Size(min = 1) vararg perms: String): Boolean {
+        if (!isMarshmallow()) {
+            return true
+        }
+        return Observable.fromIterable(perms.toList())
+                .all { perm -> mRxPermissionsFragment.get().isGranted(perm) }.blockingGet()
     }
 
     @FunctionalInterface
