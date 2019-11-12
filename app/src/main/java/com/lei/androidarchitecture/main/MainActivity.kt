@@ -11,7 +11,6 @@ import com.lei.utils.ToastUtil
 import com.lei.utils.permissions.RxPermissions
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : BaseActivity() {
     private lateinit var mViewModel: MainViewModel
 

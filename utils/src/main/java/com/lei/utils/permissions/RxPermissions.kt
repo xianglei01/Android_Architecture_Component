@@ -197,7 +197,7 @@ class RxPermissions {
 
     @TargetApi(Build.VERSION_CODES.M)
     private fun requestImplementation(vararg permissions: String): Observable<Permission> {
-        val list = ArrayList<Observable<Permission>>(permissions.size)
+        val list = ArrayList<Observable<Permission>?>(permissions.size)
         val unrequestedPermissions = ArrayList<String>()
 
         // In case of multiple permissions, we create an Observable for each of them.
