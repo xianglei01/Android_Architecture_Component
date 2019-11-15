@@ -12,12 +12,12 @@ abstract class BaseActivity : FragmentActivity(), IBasePage {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutResId)
-        initView()
+        initViewModel()
         initListener()
         initData()
     }
 
-    override fun showBaseLoading(transparent: Boolean) {
+    override fun showBaseLoading() {
     }
 
     override fun hideBaseLoading() {

@@ -9,11 +9,11 @@ import android.widget.Toast
  */
 object ToastUtil {
 
-    fun toast(context: Context, resId: Int) {
+    fun toast(context: Context?, resId: Int) {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
     }
 
-    fun toast(context: Context, res: String?) {
+    fun toast(context: Context?, res: String?) {
         Toast.makeText(context, res, Toast.LENGTH_SHORT).show()
     }
 

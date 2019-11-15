@@ -6,20 +6,44 @@ package com.lei.androidarchitecture
  */
 interface IBasePage {
 
-    val tag: String
+    /**
+     * 页面tag
+     */
+    val pageTag: String
 
+    /**
+     * 页面layout
+     */
     val layoutResId: Int
 
+    /**
+     * 页面是否可返回上一页
+     */
     fun canBack(): Boolean
 
-    fun initView()
+    /**
+     * 初始化页面
+     */
+    fun initViewModel()
 
+    /**
+     * 初始化事件
+     */
     fun initListener()
 
+    /**
+     * 初始化数据
+     */
     fun initData()
 
-    fun showBaseLoading(transparent: Boolean)
+    /**
+     * 显示请求loading
+     */
+    fun showBaseLoading()
 
+    /**
+     * 隐藏请求loading
+     */
     fun hideBaseLoading()
 
 }
