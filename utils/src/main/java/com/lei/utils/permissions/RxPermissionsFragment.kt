@@ -79,7 +79,8 @@ class RxPermissionsFragment : Fragment() {
     fun isRevoked(permission: String): Boolean {
         val fragmentActivity = activity
                 ?: throw IllegalStateException("This fragment must be attached to an activity.")
-        return fragmentActivity.packageManager.isPermissionRevokedByPolicy(permission, activity!!.packageName)
+        return fragmentActivity.packageManager.isPermissionRevokedByPolicy(permission, activity?.packageName
+                ?: "")
     }
 
     fun setLogging(logging: Boolean) {

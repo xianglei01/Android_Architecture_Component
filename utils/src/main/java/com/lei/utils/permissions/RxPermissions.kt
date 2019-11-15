@@ -176,7 +176,7 @@ class RxPermissions {
     }
 
     private fun request(trigger: Observable<*>, vararg permissions: String): Observable<Permission> {
-        require(!(permissions == null || permissions.isEmpty())) { "RxPermissions.request/requestEach requires at least one input permission" }
+        require(permissions.isNotEmpty()) { "RxPermissions.request/requestEach requires at least one input permission" }
         return oneOf(trigger, pending(*permissions))
                 .flatMap { requestImplementation(*permissions) }
     }
@@ -293,7 +293,10 @@ class RxPermissions {
         return isMarshmallow() && mRxPermissionsFragment.get().isRevoked(permission)
     }
 
-    fun isMarshmallow(): Boolean {
+    /**
+     * 6.0以上需要申请权限
+     */
+    private fun isMarshmallow(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
     }
 
