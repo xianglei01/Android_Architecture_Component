@@ -23,6 +23,7 @@ ext {
             "constraint-layout"      : "androidx.constraintlayout:constraintlayout:${version["constraintlayoutVersion"]}",
 
             //test
+            "androidJUnitRunner"     : "android.support.test.runner.AndroidJUnitRunner",
             "junit"                  : "junit:junit:4.12",
             "test-runner"            : "com.android.support.test:runner:1.0.2",
             "espresso-core"          : "com.android.support.test.espresso:espresso-core:${version["espressoSdkVersion"]}",
