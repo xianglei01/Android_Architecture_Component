@@ -17,7 +17,7 @@ interface IBasePage {
     val layoutResId: Int
 
     /**
-     * 页面是否可返回上一页
+     * 页面是否可返回上一页（返回页按钮）
      */
     fun canBack(): Boolean
 
